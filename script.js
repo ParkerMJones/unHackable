@@ -1,4 +1,5 @@
 // Assignment Code
+
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
@@ -13,104 +14,89 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-/* password components
-var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var lowercase = "abcdefghijklmnopqrstuvwxyz";
-var numbers = "0123456789";
-var symbols = "!@#$%^&*()/\<>?=-~`;:{}[].,";
-*/
 
 // select length
-/* var selectLength = function() {
-var length = parseInt(window.prompt("Choose a password length between 8 and 128."));
-    console.log("length = " + length);
-    if (length >= 8 && length <= 128){
-      return length;
-    }
-    else {
+function selectLength() {
+var input = parseInt(window.prompt("Choose a password length between 8 and 128."));
+length = input;
+    console.log("user input = " + length);
+    if (length < 8 || length > 128 || Number.isInteger(length) === false) {
       window.alert("You need to choose a value between 8 and 128");
       selectLength();
-    }
-  } */
+      }
+        console.log("return length = " + length);
+        return length;
+ };
 
-var generatePassword = function() {
 
-  var length = parseInt(window.prompt("Choose a password length between 8 and 128."));
-    console.log("length = " + length);
-    if (length >= 8 && length <= 128){
-      var length = length;
-    }
-    else {
-      window.alert("You need to choose a value between 8 and 128");
-      generatePassword();
-    }
-  
+// select characters to be included
+function characterType() {
   // confirm UPPERCASE
+  password = "";
   var confirmUppercase = window.confirm("Would you like to include Uppercase letters?");
     if (confirmUppercase === true) {
-      var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      console.log(uppercase);
-    }
-    else {
-      uppercase = "";
-      console.log("uppercase not selected");
+      password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      console.log(password);
     }
     
   // confirm lowercase
   var confirmLowercase = window.confirm("Would you like to include lowercase letters?");
     if (confirmLowercase === true) {
-      var lowercase = "abcdefghijklmnopqrstuvwxyz";
-      console.log(lowercase);
-    }
-    else {
-      lowercase = "";
-      console.log("lowercase not selected");
+      password += "abcdefghijklmnopqrstuvwxyz";
+      console.log(password);
     }
     
   // confirm numbers
   var confirmNumbers = window.confirm("Would you like to include numbers?");
     if (confirmNumbers === true){
-      var numbers = "0123456789";
-      console.log(numbers);
+      password += "0123456789";
+      console.log(password);
     }
-    else {
-      numbers = "";
-      console.log("numbers not selected");
-    }
+    
     
   // confirm symbols
   var confirmSymbols = window.confirm("Would you like to include symbols?");
     if (confirmSymbols === true){
-      var symbols = "!@#$%^&*()/<>?=-~`;:{}[].,";
-      console.log(symbols);
-    }
-    else {
-      symbols = "";
-      console.log("symbols not selected");
+      password += "!@#$%^&*()/<>?=-~`;:{}[].,";
+      console.log(password);
     }
     
-// combine selected options (unselected options added as "")
-var combine = uppercase + lowercase + numbers + symbols;
-console.log("combined array = " + combine);
 
-// start as blank, incrementally select random character from var combine
-var password = "";
-    for (i=0; i < length; i++) {
-      // choose random character from combined index (i.e ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890)
-      var characterIndex = Math.floor(Math.random() * combine.length);
-      console.log("Index # " + characterIndex);
-      password += combine.substring(characterIndex, characterIndex + 1);
-      console.log(password);
-  }
-  // if combine is blank, no option has been selected, restart
-/*  if (password === ""){
-    window.alert("You need to choose at least one character type");
-    generatePassword();
-  } */
+    console.log("before if " + password);
     if (password === ""){
       window.alert("You need to choose at least one character type");
-      generatePassword();
+      characterType();
     }
-    console.log("Password is " + password);
-    return password;
+  
+  console.log("after if " + password);
+  return password;
 };
+
+
+var generatePassword = function() {
+  finalPassword = "";
+  var length = selectLength();
+  var characters = characterType();
+  console.log("password.length = " + characters.length);
+  
+  // incrementally select random character from password();
+    for (i = 0; i < length; i++) {
+      // choose random character from combined index (i.e ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890)
+      var characterIndex = Math.floor(Math.random() * characters.length);
+      // build password by 1 character per loop
+      finalPassword += characters.charAt(characterIndex);
+      console.log("index # " + characterIndex);
+      console.log("password += " + finalPassword);
+  }
+    console.log("Final Password = " + finalPassword);
+    return finalPassword;
+};
+
+
+
+    
+
+
+
+
+
