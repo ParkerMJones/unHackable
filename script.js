@@ -31,8 +31,11 @@ length = input;
 
 // select characters to be included
 function characterType() {
-  // confirm UPPERCASE
+  
+  // start with empty string
   password = "";
+
+  // confirm UPPERCASE
   var confirmUppercase = window.confirm("Would you like to include Uppercase letters?");
     if (confirmUppercase === true) {
       password += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
